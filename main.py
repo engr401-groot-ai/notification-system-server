@@ -3,6 +3,7 @@ import re
 import logging
 from dotenv import load_dotenv
 from fastapi import FastAPI, Query, Request
+from fastapi.middleware.cors import CORSMiddleware
 from google.cloud import bigquery, firestore
 
 # Configure logging
@@ -14,6 +15,13 @@ logger = logging.getLogger("scraper")
 
 # Initialize FastAPI
 app = FastAPI(title="Notification System Server", version="1.0.0")
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # Load environment variables
 load_dotenv()
