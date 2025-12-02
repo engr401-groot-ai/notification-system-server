@@ -30,7 +30,6 @@ GCP_PROJECT_ID = os.getenv("GCP_PROJECT_ID", "your-gcp-project")
 BQ_DATASET = os.getenv("BQ_DATASET", "your_dataset")
 BQ_MENTIONS_TABLE = os.getenv("BQ_MENTIONS_TABLE", "mentions")
 
-
 @app.get("/api/mentions/recent")
 def get_recent_mentions(
 	hours: int = Query(24, ge=1, description="How many hours back to fetch"),
@@ -76,7 +75,6 @@ def get_recent_mentions(
 
 	return {"count": len(results), "results": results}
 
-
 @app.get("/api/notification-settings")
 def get_notification_settings():
 	"""
@@ -113,7 +111,6 @@ def get_notification_settings():
 	except Exception as e:
 		logger.error(f"Failed to fetch notification settings: {e}")
 		return {"ok": False, "error": str(e)}
-
 
 @app.post("/api/notification-settings")
 async def update_notification_settings(request: Request):
